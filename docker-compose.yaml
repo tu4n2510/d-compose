@@ -1,0 +1,60 @@
+version: '3.3'
+
+
+services:
+
+  mariadb:
+
+    container_name: d-mariadb
+
+    image: mariadb:latest
+
+    ports:
+
+      - 3306:3306
+
+    restart: always
+
+    volumes:
+
+      - /docker/d-mariadb/:/var/lib/mysql
+
+    environment: # from file .env
+
+      MYSQL_ROOT_PASSWORD: $MYSQL_PASS_ROOT
+
+      MYSQL_DATABASE: $MYSQL_DB
+
+      MYSQL_USER: $MYSQL_USER
+
+      MYSQL_PASSWORD: $MYSQL_PASS
+
+
+  phpmyadmin:
+
+    container_name: d-admin
+
+    image: phpmyadmin:latest
+
+    restart: always
+
+    environment:
+
+      PMA_HOST: mariadb
+
+      PMA_PORT: 3306
+
+      PMA_ARBITRARY: 1
+
+      UPLOAD_LIMIT: 1500M
+
+      POST_MAX_SIZE: 1500M
+
+      MAX_EXECUTION_TIME : 4000
+
+      MAX_INPUT_VARS: 1500
+
+    ports:
+
+      - 8080:80
+
