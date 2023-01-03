@@ -17,7 +17,7 @@ services:
 
     volumes:
 
-      - /docker/d-mariadb/:/var/lib/mysql
+      - /server/projects/mariadb/db_data:/var/lib/mysql
 
     environment: # from file .env
 
